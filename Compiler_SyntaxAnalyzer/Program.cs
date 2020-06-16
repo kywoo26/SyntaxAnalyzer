@@ -12,14 +12,14 @@ namespace Compiler_SyntaxAnalyzer
     {
         static void Main(string[] args)
         {
-            //if (args.Length == 0)
-            //{
-            //    Console.WriteLine("Input file is necessary.");
-            //    return;
-            //}
+            if (args.Length == 0)
+            {
+                Console.WriteLine("Input file is necessary.");
+                return;
+            }
 
-            //string inputFile = args[0];
-            string inputFile = "test.out";
+            string inputFile = args[0];
+            //string inputFile = "test.out";
             string currentDirectory = System.Environment.CurrentDirectory;
             string path = currentDirectory + $@"\{inputFile}";
 
