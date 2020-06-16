@@ -1,0 +1,33 @@
+﻿CODE' -> CODE
+CODE -> VDECL CODE
+CODE -> FDECL CODE
+CODE -> ϵ
+VDECL -> vtype id semi
+VDECL -> vtype ASSIGN semi
+ASSIGN -> id assign RHS
+FDECL -> vtype id lparen ARG rparen lbrace BLOCK RETURN rbrace
+ARG ->  vtype id MOREARGS
+ARG -> ϵ
+MOREARGS -> comma vtype id MOREARGS
+MOREARGS -> ϵ
+BLOCK -> STMT BLOCK
+BLOCK -> ϵ
+STMT -> VDECL
+STMT -> ASSIGN semi
+STMT -> if lparen COND rparen lbrace BLOCK rbrace ELSE
+STMT -> while lparen COND rparen lbrace BLOCK rbrace
+STMT -> for lparen ASSIGN semi COND semi ASSIGN rparen lbrace BLOCK rbrace
+ELSE-> else lbrace BLOCK rbrace
+ELSE -> ϵ
+RHS -> EXPR
+RHS -> literal
+EXPR-> TERM addsub EXPR
+EXPR-> TERM
+TERM -> FACTOR multdiv TERM
+TERM -> FACTOR
+FACTOR -> lparen EXPR rparen
+FACTOR -> id
+FACTOR -> num
+FACTOR -> float
+COND -> FACTOR comp FACTOR
+RETURN -> return FACTOR semi

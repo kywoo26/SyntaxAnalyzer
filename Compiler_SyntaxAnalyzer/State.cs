@@ -11,15 +11,15 @@ namespace Compiler_SyntaxAnalyzer
         private Dictionary<string, Transition> transition;
         public IReadOnlyDictionary<string, Transition> Transition { get { return transition; } }
 
-        // By the content, do decision.
+        // By the symbol, do decision.
         public State()
         {
             transition = new Dictionary<string, Transition>();
         }
 
-        public void Add(string content, Transition decision)
+        public void Add(string symbol, Transition decision)
         {
-            transition.Add(content, decision);
+            transition.Add(symbol, decision);
         }
     }
 }

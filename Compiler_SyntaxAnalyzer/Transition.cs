@@ -10,13 +10,20 @@ namespace Compiler_SyntaxAnalyzer
 
     class Transition
     {
-        public readonly TransitionType TransitionType;
-        public readonly int Destination;
+        public readonly TransitionType Type;
+        public readonly int StateNumber;
+        public readonly Production Production;
 
-        public Transition(TransitionType transitionType, int destination)
+        public Transition(TransitionType type, int stateNumber)
         {
-            TransitionType = transitionType;
-            Destination = destination;
+            Type = type;
+            StateNumber = stateNumber;
+        }
+
+        public Transition(TransitionType type, Production production)
+        {
+            Type = type;
+            Production = production;
         }
     }
 }

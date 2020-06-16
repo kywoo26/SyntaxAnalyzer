@@ -15,15 +15,17 @@ namespace Compiler_SyntaxAnalyzer
 
         public SLRTable()
         {
-            state = GetStateList();
+            state = GetStateListFromFile();
         }
 
-        private List<State> GetStateList()
+        private List<State> GetStateListFromFile()
         {
             var stateList = new List<State>();
-            var content = new List<string>();
+            var symbol = new List<string>();
             string tableFileName = "Compiler_SyntaxAnalyzer.Resources.Table.csv";
 
+            // Create a csv file of SLR tables derived from DFA.
+            // And build by making it resources.
             using (var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(tableFileName))
             {
                 using (var reader = new StreamReader(stream))
@@ -31,9 +33,9 @@ namespace Compiler_SyntaxAnalyzer
                     // To store the sting of contents at first line.
                     // ex) "*", ")", "CODE"
                     string line = reader.ReadLine();
-                    content.AddRange(line.Split(','));
+                    symbol.AddRange(line.Split(','));
 
-                    // To store the decision with state and content after the second line.
+                    // To store the decision with state and symbol after the second line.
                     // ex) 1 => goto 1, S1 => shift 1, R2 => reduce 2,
                     while ((line = reader.ReadLine()) != null)
                     {
@@ -49,11 +51,11 @@ namespace Compiler_SyntaxAnalyzer
                             if (decision[i].StartsWith("s"))
                                 transition = new Transition(TransitionType.SHIFT, int.Parse(decision[i].Substring(1)));
                             else if (decision[i].StartsWith("r"))
-                                transition = new Transition(TransitionType.REDUCE, int.Parse(decision[i].Substring(1)));
+                                transition = new Transition(TransitionType.REDUCE, CFG.Production[int.Parse(decision[i].Substring(1))]);
                             else
                                 transition = new Transition(TransitionType.GOTO, int.Parse(decision[i]));
 
-                            state.Add(content[i], transition);
+                            state.Add(symbol[i], transition);
                         }
 
                         stateList.Add(state);

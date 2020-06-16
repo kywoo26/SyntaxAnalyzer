@@ -61,14 +61,41 @@ namespace Compiler_SyntaxAnalyzer.Properties {
         }
         
         /// <summary>
+        ///   CODE&apos; -&gt; CODE
+        ///CODE -&gt; VDECL CODE
+        ///CODE -&gt; FDECL CODE
+        ///CODE -&gt; $
+        ///VDECL -&gt; vtype id semi
+        ///VDECL -&gt; vtype ASSIGN semi
+        ///ASSIGN -&gt; id assign RHS
+        ///FDECL -&gt; vtype id lparen ARG rparen lbrace BLOCK RETURN rbrace
+        ///ARG -&gt;  vtype id MOREARGS
+        ///ARG -&gt; $
+        ///MOREARGS -&gt; comma vtype id MOREARGS
+        ///MOREARGS -&gt; $
+        ///BLOCK -&gt; STMT BLOCK
+        ///BLOCK -&gt; $
+        ///STMT -&gt; VDECL
+        ///STMT -&gt; ASSIGN semi
+        ///STMT -&gt; if lparen COND rparen lbrace BLOCK rbrace ELSE
+        ///STMT -&gt; while lparen COND rparen lbrace BLOCK rbrace
+        ///STMT -&gt; for lparen ASSIGN semi COND s[나머지 문자열은 잘림]&quot;;과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string Production {
+            get {
+                return ResourceManager.GetString("Production", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   #Content,vtype,id,semi,assign,lparen,rparen,lbrace,rbrace,comma,if,while,for,else,literal,addsub,multdiv,num,float,comp,return,$,CODE&apos;,CODE,VDECL,ASSIGN,FDECL,ARG,MOREARGS,BLOCK,STMT,ELSE,RHS,EXPR,TERM,FACTOR,COND,RETURN
         ///0,s4,,,,,,,,,,,,,,,,,,,,r3,,1,2,,3,,,,,,,,,,,
-        ///1,,,,,,,,,,,,,,,,,,,,,acc,,,,,,,,,,,,,,,,
+        ///1,,,,,,,,,,,,,,,,,,,,,r0,,,,,,,,,,,,,,,,
         ///2,s4,,,,,,,,,,,,,,,,,,,,r3,,5,2,,3,,,,,,,,,,,
         ///3,s4,,,,,,,,,,,,,,,,,,,,r3,,6,2,,3,,,,,,,,,,,
         ///4,,s7,,,,,,,,,,,,,,,,,,,,,,,8,,,,,,,,,,,,
         ///5,,,,,,,,,,,,,,,,,,,,,r1,,,,,,,,,,,,,,,,
-        ///6,,,,,,,,,,,,,,,,,,,,[나머지 문자열은 잘림]&quot;;과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///6,,,,,,,,,,,,,,,,,,,,,[나머지 문자열은 잘림]&quot;;과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         internal static string Table {
             get {
